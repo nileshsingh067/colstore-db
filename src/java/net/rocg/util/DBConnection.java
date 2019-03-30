@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Rishi Tyagi
+ * @author Nilesh Kumar Singh
  */
 public class DBConnection extends RLogger implements Serializable{
     public DBConnection(){}

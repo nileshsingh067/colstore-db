@@ -22,7 +22,7 @@ import org.apache.commons.codec.binary.Base64;
 
 /**
  *
- * @author Rishi Tyagi
+ * @author Nilesh Kumar Singh
  */
 public class NUtil {
     public static int FIELD_TYPE_WIDTH=1,FIELD_TYPE_HEIGHT=2,FIELD_TYPE_PARTNUMBER=3,FIELD_TYPE_FILE_EXTENSION=4,FIELD_TYPE_FILE_NAME_PREFIX=5,FIELD_TYPE_FILE_NAME=6;

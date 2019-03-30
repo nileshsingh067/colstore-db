@@ -8,7 +8,7 @@ package net.rocg.util;
 
 /**
  *
- * @author Rishi Tyagi
+ * @author Nilesh Kumar Singh
  */
 public class StatusMessage implements java.io.Serializable{
     public static final String MSG_CLASS_INFO="infomsg";

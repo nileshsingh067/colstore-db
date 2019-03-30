@@ -14,7 +14,7 @@ import net.rocg.web.mbeans.LoginBean;
 
 /**
  *
- * @author Rishi Tyagi
+ * @author Nilesh Kumar Singh
  */
 public class RLogger {
     

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponseWrapper;
 
 /**
  *
- * @author Rishi Tyagi
+ * @author Nilesh Kumar Singh
  */
 public class JsessionIdAvoiderFilter implements Filter {
 

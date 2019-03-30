@@ -7,7 +7,7 @@ package net.rocg.util;
 
 /**
  *
- * @author JSS
+ * @author Nilesh Kumar Singh
  */
 public class StringInputValidator {
     public static String validateString(String str,String prohibitedChars){
