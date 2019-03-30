@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../home/header.xhtml">
+
+            <ui:define name="content">
+                <h:form id="frm1">
+                  
+                    <p:accordionPanel id="ap1">
+                        <p:tab title="Create New">
+                            <table width="600">
+                                <tr>
+                                    <td width="25%">Operator Name : </td>
+                                    <td width="25%"><p:selectOneMenu id="operatorList" value="#{operatorCircleBean.selectedOperator}" >
+                                            <f:selectItem itemLabel="Select Operator Name" itemValue="" />
+                                            <f:selectItems value="#{operatorCircleBean.operatorList}" />
+                                            </p:selectOneMenu>
+                                    </td>
+                                    <td width="25%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="25%">Circle Name : </td>
+                                    <td width="25%"><p:inputText id="newcircle" value="#{operatorCircleBean.newCircleName}"/></td>
+                                    <td width="25%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="25%">LRN : </td>
+                                    <td width="25%"><p:inputText id="newcirclelrn" value="#{operatorCircleBean.newLrn}"/></td>
+                                    <td width="25%"><p:commandButton value="Submit" update="msgOut,circlelisttable" actionListener="#{operatorCircleBean.createNew()}"/></td>
+                                </tr>
+                                <tr>
+                                    <td width="100%" colspan="3"><h:outputText id="msgOut" class="#{operatorCircleBean.statusMsg.msgClass}" value="#{operatorCircleBean.statusMsg.message}"/> </td>
+                                </tr>
+                            </table>
+                        </p:tab>
+                        <p:tab title="View/Change Operator Details">
+                            <p:commandButton value="Refresh Circle List" update="circlelisttable" actionListener="#{operatorCircleBean.reloadList()}"/>
+                            <p:dataTable id="circlelisttable" var="circle" value="#{operatorCircleBean.operatorCircleList}" editable="true" paginator="true" rows="10" selectionMode="single" selection="#{operatorCircleBean.selectedOperatorCircle}" rowKey="#{circle.circleId}">
+                                <f:facet name="header">
+                                        List of Available Operator Circles
+                                </f:facet>
+                                <p:column style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Circle Id" />
+                                    </f:facet>
+                                    <h:outputText value="#{circle.circleId}" />
+                                </p:column>
+                                <p:column filterBy="#{circle.countryName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Country Name" />
+                                    </f:facet>
+                                    <h:outputText value="#{circle.countryName}" />
+                                </p:column>
+                                <p:column filterBy="#{circle.operatorName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Operator Name" />
+                                    </f:facet>
+                                    <h:outputText value="#{circle.operatorName}" />
+                                </p:column>
+                                <p:column filterBy="#{circle.circleName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Circle Name" />
+                                    </f:facet>
+                                    <h:outputText value="#{circle.circleName}" />
+                                </p:column>
+                                <p:column >
+                                    <f:facet name="header">
+                                        <h:outputText value="LRN" />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{circle.lrn}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{circle.lrn}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>
+                                <p:column >
+                                    <f:facet name="header">
+                                        <h:outputText value="Circle Status" />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{circle.statusString}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{circle.status}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>
+                                
+                                <p:ajax event="rowEdit" listener="#{operatorCircleBean.onEdit}" update="circlelisttable" />
+                               <p:column>
+                                    <p:rowEditor />
+                               </p:column>
+                            </p:dataTable>
+                            
+                        </p:tab>
+
+                    </p:accordionPanel>
+                </h:form>
+
+            </ui:define>
+
+        
+        </ui:composition>
+
+    </body>
+</html>

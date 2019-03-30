@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../home/header.xhtml">
+
+            <ui:define name="content">
+                <h:form id="frm1">
+                  
+                    <p:accordionPanel id="ap1">
+                        <p:tab title="Create New Msisdn Series">
+                            <table width="800">
+                                <tr>
+                                    <td width="25%" align="right">Operator Name : </td>
+                                    <td width="25%"><p:selectOneMenu id="operatorList" value="#{msisdnSeriesBean.selectedOperator}" style="width: 250px;">
+                                            <f:selectItem itemLabel="Select Operator Name" itemValue="" />
+                                            <f:selectItems value="#{msisdnSeriesBean.operatorList}" />
+                                            <p:ajax event="change" listener="#{msisdnSeriesBean.refreshCircles()}" update="circleList"/>
+                                            </p:selectOneMenu>
+                                    </td>
+                                    <td width="25%" align="right">Circle Name : </td>
+                                    <td width="25%"><p:selectOneMenu id="circleList" value="#{msisdnSeriesBean.selectedCircle}" style="width: 250px;">
+                                            <f:selectItem itemLabel="Select Circle Name" itemValue="" />
+                                            <f:selectItems value="#{msisdnSeriesBean.circleList}" />
+                                            </p:selectOneMenu>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                     <td width="25%" align="right">Rating Engine : </td>
+                                     <td width="25%"><p:selectOneMenu id="ratingEngineList" value="#{msisdnSeriesBean.selectedRatingEngine}" style="width: 250px;">
+                                            <f:selectItem itemLabel="Select Rating Engine" itemValue="" />
+                                            <f:selectItems value="#{msisdnSeriesBean.ratingEngineList}" />
+                                            </p:selectOneMenu>
+                                    </td>
+                                      <td width="25%" align="right">&nbsp; </td>
+                                    <td width="25%" ><p:commandButton value="Submit" actionListener="#{msisdnSeriesBean.createNew()}" update="msgOut,msisdnserieslisttable" style="width: 250px;" /> </td>
+                                </tr>
+
+                                <tr>
+                                    <td width="100%" colspan="4"><h:outputText id="msgOut" class="#{msisdnSeriesBean.statusMsg.msgClass}" value="#{msisdnSeriesBean.statusMsg.message}"/> </td>
+                                </tr>
+                            </table>
+                            <p:tabView id="aptab1">
+                                    <p:tab title="Register New Series">
+                                        <table width="800">    
+                                            <tr>
+                                                <td width="100%" colspan="2" align="left">Enter New MSISDN Series to be registered here below. Msisdn series is 7-8 digit prefix of a Mobile Number including country Code. e.g. 9198101 for a series 9198101xxxxx</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="50%" align="right">Msisdn Prefix: </td>
+                                                <td width="50%"><p:inputText id="newmsisdnseries" value="#{msisdnSeriesBean.newMsisdnSeries}" style="width: 250px;" /></td>
+                                            </tr>
+
+                                        </table>
+                                    </p:tab>
+                                  <!--  <p:tab title="Upload From File">
+                                        <table width="800">
+                                            <tr>
+                                                <td width="100%" colspan="2" align="left">Browse your file containing list of MSISDN Series to be uploaded. Sample of the File Format is 
+                                                        <br/>9198101
+                                                        <br/>9198102
+                                                        <br/>91981021
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="25%" align="right">Select File: </td>
+                                                <td width="75%"> <p:fileUpload value="#{msisdnSeriesBean.msisdnSeriesBulkFile}" mode="simple" disabled="false" style="width: 250px;" /></td>
+                                            </tr>
+
+                                        </table>
+                                    </p:tab>-->
+                                    
+                            </p:tabView>
+                            
+                        </p:tab>
+                        <p:tab title="View/Change Msisdn Series Details">
+                            <p:commandButton value="Refresh Msisdn Series" actionListener="#{msisdnSeriesBean.refreshMsisdnSeriesList(null, 0, false, false, false)}" update="msisdnserieslisttable"  />
+                            <p:dataTable id="msisdnserieslisttable" var="msisdnseries" value="#{msisdnSeriesBean.msisdnSeriesList}" editable="true" paginator="true" rows="10" selectionMode="single" selection="#{msisdnSeriesBean.selectedMsisdnSeries}" rowKey="#{msisdnseries.msisdnSeriesId}">
+                                <f:facet name="header">
+                                        List of Registered Msisdn Series  
+                                </f:facet>
+                                <p:column style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Series Id" />
+                                    </f:facet>
+                                    <h:outputText value="#{msisdnseries.msisdnSeriesId}" />
+                                </p:column>
+                                <p:column filterBy="#{msisdnseries.countryName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Country Name" />
+                                    </f:facet>
+                                    <h:outputText value="#{msisdnseries.countryName}" />
+                                </p:column>
+                                <p:column filterBy="#{msisdnseries.operatorName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Operator Name" />
+                                    </f:facet>
+                                    <h:outputText value="#{msisdnseries.operatorName}" />
+                                </p:column>
+                                <p:column filterBy="#{msisdnseries.circleName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Circle Name" />
+                                    </f:facet>
+                                    <h:outputText value="#{msisdnseries.circleName}" />
+                                </p:column>
+                                <p:column filterBy="#{msisdnseries.msisdnPrefix}" style="alignment-adjust: middle;alignment-baseline: central;" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Msisdn Prefix" />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{msisdnseries.msisdnPrefix}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{msisdnseries.msisdnPrefix}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>
+                                <p:column >
+                                    <f:facet name="header">
+                                        <h:outputText value=" Status" />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{msisdnseries.statusString}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{msisdnseries.status}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>
+                                
+                                <p:ajax event="rowEdit" listener="#{msisdnSeriesBean.onEdit}" update="msisdnserieslisttable" />
+                               <p:column>
+                                    <p:rowEditor />
+                               </p:column>
+                            </p:dataTable>
+                            
+                        </p:tab>
+
+                    </p:accordionPanel>
+                </h:form>
+
+            </ui:define>
+
+        
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../home/header.xhtml">
+
+            <ui:define name="content">
+                <h:form id="frm1">
+                    <p:accordionPanel id="ap1">
+                        <p:tab title="Create New User">
+                                        <table width="100%" align="left">
+                                            <tr>
+                                                <td width="16%" align="right"> <h:outputLabel value="User Role:" for="userrole"/></td>
+                                                <td width="16%" ><p:selectOneMenu id="userrole"  style="width:170px;" value="#{userManagerBean.selectedUserRole}">
+                                                        <f:selectItem itemLabel="Select User Role" itemValue="" />
+                                                        <f:selectItems value="#{userManagerBean.userRoleList}" />
+                                                    </p:selectOneMenu></td>
+                                            
+                                                <td width="16%" align="right"> <h:outputLabel value="Company name:" for="company"/></td>
+                                                <td width="16%" > <p:selectOneMenu id="company" value="#{userManagerBean.registeredCompany}" style="width:170px;">
+                                                           <f:selectItem itemLabel="Select Company Name" itemValue="" />
+                                                           <f:selectItems value="#{userManagerBean.registeredCompanyList}" />
+                                                    </p:selectOneMenu></td>
+                                                <td width="16%" align="right"> <h:outputLabel value="Portal Access:" for="portalAccess"/></td>
+                                                <td  width="16%">
+                                                    <p:selectOneMenu id="portal" value="#{userManagerBean.allowedPortal}" style="width:170px;">
+                                                           <f:selectItem itemLabel="Select Portal Name" itemValue="" />
+                                                           <f:selectItems value="#{userManagerBean.portalList}" />
+                                                    </p:selectOneMenu>
+                                                   
+                                                </td>
+                                            </tr>
+                                            <tr><td colspan="6" width="100%"><hr/></td></tr>
+                                            <tr><td colspan="6" width="100%" align="left"><u>Login Credentials :-</u></td></tr>
+                                            
+                                            <tr>
+                                                <td width="16%" align="right"> <h:outputLabel value="Login Id:" for="loginid"/></td>
+                                                <td width="16%" ><p:inputText id="loginid" value="#{userManagerBean.newUser.userName}" style="width:170px;"/></td>
+                                                <td width="16%" align="right"> <h:outputLabel value="Password:" for="pwd"/></td>
+                                                <td width="16%"><p:password id="pwd" value="#{userManagerBean.newUser.password}" style="width:170px;"/></td>
+                                                <td width="20%" align="right"> <h:outputLabel value="Retype Password:" for="pwd"/></td>
+                                                <td width="16%"><p:password id="repwd" value="#{userManagerBean.newUser.verifyPassword}" style="width:170px;"/></td>
+                                            </tr>
+                                            <tr><td colspan="6" width="100%"><hr/></td></tr>
+                                            <tr><td colspan="6" width="100%" align="left"> <u>Primary Contact Details :-</u></td></tr>
+                                            
+                                            <tr>
+                                                <td width="16%" align="right"> <h:outputLabel value="Primary Email:" for="pemail"/></td>
+                                                <td width="16%" ><p:inputText id="pemail" value="#{userManagerBean.newUser.email}" style="width:170px;"/></td>
+                                                <td width="16%" align="right"> <h:outputLabel value="Primary Mobile:" for="pmobile"/></td>
+                                                <td width="16%"><p:inputText id="pmobile" value="#{userManagerBean.newUser.mobile}" style="width:170px;"/></td>
+                                                <td width="36%" align="right" colspan="2"> <p:commandButton value="Submit" update="msgOut,userlisttable" actionListener="#{userManagerBean.createNew()}" style="width:170px;"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="100%" colspan="6"><h:outputText id="msgOut" class="#{userManagerBean.statusMsg.msgClass}" value="#{userManagerBean.statusMsg.message}"/></td>
+                                            </tr>
+                                        </table>
+                        </p:tab>
+                        <p:tab title="View/Change User Details">
+                            <p:dataTable id="userlisttable" var="cmsuser" value="#{userManagerBean.userList}" editable="true" paginator="true" rows="10" selectionMode="single" selection="#{userManagerBean.selectedUser}" rowKey="#{cmsuser.userId}">
+                                <f:facet name="header">
+                                        List of Registered User Accounts  <p:commandButton value="Refresh Table Data" update="userlisttable"  />
+                                </f:facet>
+                                <p:column style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="User Id" />
+                                    </f:facet>
+                                    <h:outputText value="#{cmsuser.userId}" />
+                                </p:column>
+                                <p:column filterBy="#{cmsuser.userName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Login Id" />
+                                    </f:facet>
+                                    <h:outputText value="#{cmsuser.userName}" />
+                                </p:column>
+                                <p:column filterBy="#{cmsuser.companyName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Company Name" />
+                                    </f:facet>
+                                    <h:outputText value="#{cmsuser.companyName}" />
+                                </p:column>
+                                <p:column filterBy="#{cmsuser.userRole}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="User Role" />
+                                    </f:facet>
+                                    <h:outputText value="#{cmsuser.userRole}" />
+                                </p:column>
+                                <p:column filterBy="#{cmsuser.mobile}" style="alignment-adjust: middle;alignment-baseline: central;" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Mobile N0." />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{cmsuser.mobile}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{cmsuser.mobile}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>
+                                <p:column filterBy="#{cmsuser.email}" style="alignment-adjust: middle;alignment-baseline: central;" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Email" />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{cmsuser.email}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{cmsuser.email}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>
+                                <p:column >
+                                    <f:facet name="header">
+                                        <h:outputText value=" Status" />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{cmsuser.statusString}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{cmsuser.status}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>
+                                
+                                <p:ajax event="rowEdit" listener="#{userManagerBean.onEdit}" update="userlisttable" />
+                               <p:column>
+                                    <p:rowEditor />
+                               </p:column>
+                            </p:dataTable>
+                        </p:tab>
+                       <!-- <p:tab title="Manage Portal Access for Registered Users">
+                            
+                        </p:tab>-->
+                    </p:accordionPanel>
+                </h:form>
+            </ui:define>
+
+          
+
+        </ui:composition>
+
+    </body>
+</html>

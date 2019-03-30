@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../home/header.xhtml">
+
+            <ui:define name="content">
+                <h:form id="frm1">
+                  
+                    <table width="100%">
+                                <tr>
+                                    <td width="25%" align="right">&nbsp; </td>
+                                    <td width="25%" align="left"> <p:selectBooleanCheckbox id="createsupercatg" value="#{contentCategoryBean.superCategory}" itemLabel="Create Super Category"  style="width:250px;"/> </td>
+                                    <td width="25%" align="right">Select Super Category : </td>
+                                    <td width="25%" align="left"><p:selectOneMenu id="superCategory" value="#{contentCategoryBean.newCategory.parentCategoryName}"  style="width:170px;">
+                                                <f:selectItem itemLabel="Select Super Cayegory" itemValue="" />
+                                                <f:selectItems value="#{contentCategoryBean.superCategories}"/>
+                                            </p:selectOneMenu>
+                                            
+                                    </td>
+                                </tr>
+                    </table>
+                    
+                  <p:dataTable id="categorylisttable" var="category" value="#{contentCategoryBean.categoryList}" editable="true" paginator="true" rows="10" selectionMode="single" selection="#{contentCategoryBean.selectedCategory}" rowKey="#{category.categoryId}">
+                                <f:facet name="header">
+                                        List of Available Categories   <p:commandButton value="Refresh Table" update="categorylisttable" />
+                                </f:facet>
+                                <p:column style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Category Id" />
+                                    </f:facet>
+                                    <h:outputText value="#{category.categoryId}" />
+                                </p:column>
+                                <p:column filterBy="#{category.categoryName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Category Name" />
+                                    </f:facet>
+                                    <h:outputText value="#{category.categoryName}" />
+                                </p:column>
+                                <p:column filterBy="#{category.displayName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Display Name" />
+                                    </f:facet>
+                                    <h:outputText value="#{category.displayName}" />
+                                </p:column>
+                                <p:column filterBy="#{category.parentCategoryName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Super Category" />
+                                    </f:facet>
+                                    <h:outputText value="#{category.parentCategoryName}" />
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Show Order" />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{category.showOrder}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{category.showOrder}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>
+                                <p:column >
+                                    <f:facet name="header">
+                                        <h:outputText value="Category Status" />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{category.statusString}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{category.status}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:ajax event="rowEdit" listener="#{contentCategoryBean.onEdit}" update="categorylisttable" />
+                               <p:column>
+                                    <p:rowEditor />
+                               </p:column>
+                            </p:dataTable>
+                    
+                </h:form>
+
+            </ui:define>
+
+        
+        </ui:composition>
+
+    </body>
+</html>

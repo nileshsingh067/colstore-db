@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../home/header.xhtml">
+
+            <ui:define name="content">
+                <h:form id="frm1" enctype="application/x-www-form-urlencoded">
+                    <table width="100%">
+                        <TR>
+                            <td width="100%" colspan='2' align="center" class="bannerheadsmall"> Uploaded files are here below, please click on 'Commit Files' to close transaction. </td>
+                        </TR>
+                        <tr><td colspan="2" width="100%">&nbsp;</td></tr>
+                        <tr>
+                            <td width="50%" align="right" class="labeltext"> Meta-data File : </td>
+                            <td width="50%" align="left"> 
+                                <h:outputText id="msg2" class="#{bulkContentUploadBean.statusMsg.msgClass}" value="#{bulkContentUploadBean.bulkUploadMetaDataFile.fileName}" style="font-size: 10px; font-weight: bold; word-wrap: true;"/>
+                            </td>
+                        </tr>
+                        <tr><td colspan="2" width="100%">&nbsp;</td></tr>
+                        <tr>
+                            <td width="50%" align="right" class="labeltext">Content File : </td>
+                            <td width="50%" align="left">
+                                <h:outputText id="msg1" class="#{bulkContentUploadBean.statusMsg.msgClass}" value="#{bulkContentUploadBean.bulkUploadContentFile.fileName}" style="font-size: 10px; font-weight: bold; word-wrap: true;"/>
+                               
+                            </td>
+                        </tr>
+                        <tr><td colspan="2" width="100%">&nbsp;</td></tr>
+                        <tr>
+                            <td width="50%" align="center" class="labeltext"> <a href="bulkupload.xhtml" class="bannerheadsmall">Go Back</a></td>
+                            <td width="50%" align="center">
+                                <p:commandButton id="commit" update="msgOut,commit" value="Commit Files" disabled="#{bulkContentUploadBean.disableCommit}" action="#{bulkContentUploadBean.commitBulkContent()}" style="width:170px;"/>
+                                <p:commandButton id="Upload_More" update="" value="Upload New Content"  action="#{bulkContentUploadBean.bulkuploadAgain()}" style="width:170px;"/>
+                            </td>
+                        </tr>
+                        <tr><td colspan="2" width="100%">&nbsp;</td></tr>
+                        <tr>
+                             <td width="100%" colspan="2" align="center" class="labeltext">
+                                 <h:outputText id="msgOut" class="#{bulkContentUploadBean.statusMsg.msgClass}" value="#{bulkContentUploadBean.statusMsg.message}" style="font-size: 10px; font-weight: bold; word-wrap: true;"/>
+                            </td>
+                        </tr>
+                        <tr><td colspan="2" width="100%"><hr/></td></tr>
+                       
+                        
+                        
+                    </table>
+                </h:form>
+
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

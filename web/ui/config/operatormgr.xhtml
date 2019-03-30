@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../home/header.xhtml">
+
+            <ui:define name="content">
+                <h:form id="frm1">
+                    <p:accordionPanel id="ap1">
+                        <p:tab title="Create New">
+                            <table width="600">
+                                <tr>
+                                    <td width="25%">Country Name : </td>
+                                    <td width="25%"><p:selectOneMenu id="countryList" value="#{operatorBean.selectedCountry}" >
+                                            <f:selectItem itemLabel="Select Country Name" itemValue="" />
+                                            <f:selectItems value="#{operatorBean.countryList}" />
+                                            </p:selectOneMenu>
+                                    </td>
+                                    <td width="25%">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td width="25%">Operator Name : </td>
+                                    <td width="25%"><p:inputText id="newcountry" value="#{operatorBean.newOperatorName}"/></td>
+                                    <td width="25%"><p:commandButton value="Submit" update="msgOut,operatorlisttable" actionListener="#{operatorBean.createNew()}"/></td>
+                                </tr>
+                                <tr>
+                                    <td width="100%" colspan="3"><h:outputText id="msgOut" class="#{operatorBean.statusMsg.msgClass}" value="#{operatorBean.statusMsg.message}"/> </td>
+                                </tr>
+                            </table>
+                        </p:tab>
+                        <p:tab title="View/Change Operator Details">
+                            <p:commandButton value="Refresh Operator List" update="operatorlisttable" actionListener="#{operatorBean.reloadList()}"/>
+                            <p:dataTable id="operatorlisttable" var="operator" value="#{operatorBean.operatorList}" editable="true" paginator="true" rows="10" selectionMode="single" selection="#{operatorBean.selectedOperator}" rowKey="#{operator.operatorId}">
+                                <f:facet name="header">
+                                        List of Available Operators
+                                </f:facet>
+                                <p:column style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Operator Id" />
+                                    </f:facet>
+                                    <h:outputText value="#{operator.operatorId}" />
+                                </p:column>
+                                <p:column filterBy="#{operator.countryName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Country Name" />
+                                    </f:facet>
+                                    <h:outputText value="#{operator.countryName}" />
+                                </p:column>
+                                <p:column filterBy="#{operator.operatorName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Operator Name" />
+                                    </f:facet>
+                                    <h:outputText value="#{operator.operatorName}" />
+                                </p:column>
+                                <p:column >
+                                    <f:facet name="header">
+                                        <h:outputText value="Operator Status" />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{operator.statusString}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{operator.status}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>
+                                <p:ajax event="rowEdit" listener="#{operatorBean.onEdit}" update="" />
+                               <p:column>
+                                    <p:rowEditor />
+                               </p:column>
+                            </p:dataTable>
+                            
+                        </p:tab>
+
+                    </p:accordionPanel>
+                </h:form>
+
+            </ui:define>
+
+        
+        </ui:composition>
+
+    </body>
+</html>

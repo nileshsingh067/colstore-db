@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/colstore-db">
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="jiffycmsdb" password="admin" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/db_colstore?characterEncoding=latin1" username="root"/>
+  <!--  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="jiffycmsdb" password="cgwuiusr@PWD" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/jiffycmsv2?" username="cgwuiusr"/>-->
+</Context>

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../home/header.xhtml">
+
+            <ui:define name="content">
+                <h:form id="frm1" enctype="application/form-data">
+                    <table width="100%">
+                        <tr><td colspan="10" width="100%"><h:outputText id="msgout" class="#{html5gameupload.statusMsg.msgClass}" value="#{html5gameupload.statusMsg.message}"/></td></tr>
+                        <TR>
+                            <td width="100%" colspan='2' align="center" class="bannerheadsmall"> Please choose content and click on 'Upload'. 
+                            </td>
+                        </TR>
+
+                        <!--                        <tr><td colspan="2" width="100%"><hr/></td></tr>-->
+                        <tr>
+                            <td width="15%" align="right" class="labeltext">Content File</td>
+                            <td width="85%" align="left">
+                                Allowed file formats : zip <br/>
+                                <p:fileUpload class="labeltext" id="vidcontentfiles" fileUploadListener="#{html5gameupload.handleBulkFileUpload}" multiple="true"  mode="advanced" dragDropSupport="true"  fileLimit="1" fileLimitMessage="Only One File can be uploaded at a time." sizeLimit="609715200" allowTypes="/(\.|\/)(zip)$/" style="width:600px;" update="msgout"/>
+<!--                                <a href="bulkupload_confirm.xhtml" class="bannerheadsmall">Next</a>-->
+
+
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </h:form>
+
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

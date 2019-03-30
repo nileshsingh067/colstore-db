@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../home/header.xhtml">
+
+            <ui:define name="content">
+                <h:form id="frm1">
+                    <table align="center" width="100%">
+                        <tr> <td class="bannerheadsmall" colspan="5" width="100%" align="center"> Please fill the below form to upload a new content and click Upload Files to move next. (All Fields are required!)</td></tr>
+                        <tr> <td class="infomsg" colspan="5" width="100%" align="center"> &nbsp;</td></tr>
+                        <tr>
+                            <td width="15%" align="right" class="labeltext" >Content Type</td>
+                            <td width="10%" align="left" class="labeltext"><p:selectOneMenu class="labeltext" id="contentType" value="#{contentUploadBean.selectedContentType}"  style="width: 170px;">
+                                    <f:selectItem itemLabel="Select Content Type" itemValue="0,0" />
+                                    <f:selectItems value="#{contentUploadBean.contentTypeList}"/>
+                                    <p:ajax event="change" listener="#{contentUploadBean.refreshList(false, false, false, false,true)}" partialSubmit="true" update="multipartcontentchk,contentAlbum,contentArtists,contentMusician,contentLyricist,transcodeflag,contentsinger"/>
+                                </p:selectOneMenu> 
+                            </td>
+                            <td width="15%" align="right" class="labeltext" >Hosting Type </td>
+                            <td width="10%" align="left" class="labeltext" ><p:selectOneMenu class="labeltext" id="hostingType" value="#{contentUploadBean.newContent.hostingType}"  style="width: 170px;" >
+                                    <f:selectItem itemLabel="CMS-SERVER" itemValue="LOCAL" />
+                                    <!-- <f:selectItem itemLabel="REMOTE-SERVER" itemValue="REMOTE" />-->
+                                </p:selectOneMenu>
+
+                            </td>
+                            <td class="infomsg" width="50%" align="left"> <h:outputText class="infomsg" value="Pl select Content Type and Hosting category below for the content you wish to upload. Pl be sure while selecting Hosting Category, Choose CMS-SERVER if you want CMS to handle the content locally else select REMOTE-Hosting." style="width:400px;"/> </td>
+                        </tr>
+                        <tr> <td class="infomsg" colspan="5" width="100%" align="center"> <hr/></td></tr>
+                        <tr>
+                            <td width="15%" align="right" class="labeltext" >Content category</td>
+                            <td width="10%" align="left"  class="labeltext" > <p:selectOneMenu class="labeltext" id="contentSuperCatg" value="#{contentUploadBean.newContent.superCategoryName}"  style="width: 170px;">
+                                    <f:selectItem itemLabel="Select Content Category" itemValue="0" />
+                                    <f:selectItems value="#{contentUploadBean.superCategoryList}"/>
+                                    <p:ajax event="change" listener="#{contentUploadBean.reloadSubCategories()}" update="contentCatg"/>
+                                </p:selectOneMenu></td>
+
+                            <td width="15%" align="right" class="labeltext" > Sub Category </td>
+                            <td width="10%" align="left"> <p:selectOneMenu class="labeltext" id="contentCatg" value="#{contentUploadBean.newContent.categoryName}"  style="width: 170px;">
+                                    <f:selectItem itemLabel="Select Content Category" itemValue="0" />
+                                    <f:selectItems value="#{contentUploadBean.contentCategoryList}"/>
+                                </p:selectOneMenu></td>
+                            <td class="infomsg" width="50%" align="left"> <h:outputText class="infomsg" value="Content needs to be associated with a content category. CMS Maintains 2 level of Categorization for the content, Please select your preferred Super Category and Category here below to upload a new content." style="width:400px;"/> </td>
+                        </tr>
+                        <tr> <td class="infomsg" colspan="5" width="100%" align="center"> <hr/></td></tr>
+                        <tr>
+                            <td width="15%" align="right" class="labeltext" >CP Catalogue No</td>
+                            <td width="10%" align="left"> <p:inputText id="cpcatalog" value="#{contentUploadBean.newContent.cpcatalogNumber}" maxlength="15"  style="width: 170px;"/> </td>
+                            <td width="15%" align="right" class="labeltext" >Copyright Owner</td>
+                            <td width="10%" align="left"><p:selectOneMenu class="labeltext" id="copyrightOwner" value="#{contentUploadBean.newContent.copyrightName}"  style="width: 170px;">
+                                    <f:selectItem itemLabel="Select Copyright Owner" itemValue="0" />
+                                    <f:selectItems value="#{contentUploadBean.copyrightOwner}" />
+                                </p:selectOneMenu></td>
+                            <td class="infomsg" width="50%" rowspan="3" align="left"> <h:outputText class="infomsg" value="CP Catalog No is used to linked in the CP reports and hence is must. Copyright owner is the company who originally own legal digital rights for providing this content on the platform this content is to be served. Short &amp; Long description is used on the wap portals to display content name with the preview icon as per portal requirements. Show Order helps CMS to decide the Display Order of the content wherever sequential order of the content needs to be managed. Search Keywords are optional but good to mention to increase the visibility of the content in search queries." style="width:400px;"/> </td>
+                        </tr>
+                        <tr>
+
+                            <td width="15%" align="right" class="labeltext" >Content Name </td>
+                            <td width="10%" align="left"> <p:inputText id="contentName" value="#{contentUploadBean.newContent.contentName}" maxlength="50"  style="width: 170px;"/></td>
+                            <td width="15%" align="right" class="labeltext" >Short Description/Display text</td>
+                            <td width="10%" align="left"><p:inputText id="contentSD" value="#{contentUploadBean.newContent.shortPreviewText}" maxlength="50"  style="width: 170px;"/></td>
+
+                        </tr>
+                        <tr>
+                            <td width="15%" align="right" class="labeltext" > Long Description </td>
+                            <td width="10%" align="left"><p:inputTextarea id="contentLD" value="#{contentUploadBean.newContent.longPreviewText}" autoResize="false" maxlength="160" rows="2"  style="width: 170px;"/></td>
+                            <td width="15%" align="right" class="labeltext" >Search Keywords</td>
+                            <td width="10%"  align="left"><p:inputTextarea id="searchKey" value="#{contentUploadBean.newContent.searchKeywords}" autoResize="false" maxlength="160" rows="2" style="width:170px;"/></td>
+                        </tr>
+                        <tr> <td class="infomsg" colspan="5" width="100%" align="center"> <hr/></td></tr>
+                        <tr>
+                            <td width="15%" align="right" class="labeltext" > Album / Movie</td>
+                            <td width="10%" align="left" class="labeltext" ><p:inputText id="contentAlbum" value="#{contentUploadBean.newContent.albumOrMovie}" maxlength="50" disabled="#{contentUploadBean.isDisabled('ALBUM')}"  style="width: 170px;"/></td>
+                            <td width="15%" align="right" class="labeltext" >Artist's</td>
+                            <td width="10%"  align="left"><p:inputText id="contentArtists" value="#{contentUploadBean.newContent.artist}" maxlength="50" disabled="#{contentUploadBean.isDisabled('ARTIST')}" style="width: 170px;"/></td>
+                            <td class="infomsg" rowspan="3" width="50%" align="left"> <h:outputText class="infomsg" value="Content Specific Parameters, Please provide value if relevant and enabled else leave default 'NA' i.e Not Applicable." style="width:100%;"/> </td>
+                        </tr>
+                        <tr>
+                            <td width="15%" align="right" class="labeltext" > Musician</td>
+                            <td width="10%" align="left"><p:inputText id="contentMusician" value="#{contentUploadBean.newContent.musicion}" disabled="#{contentUploadBean.isDisabled('MUSICIAN')}" maxlength="50"  style="width: 170px;"/></td>
+                            <td width="15%" align="right" class="labeltext" >Lyricist</td>
+                            <td width="10%"  align="left"><p:inputText id="contentLyricist" value="#{contentUploadBean.newContent.lyricist}" disabled="#{contentUploadBean.isDisabled('LYRICIST')}" maxlength="50"  style="width: 170px;"/></td>
+                        </tr>
+                        <tr>
+                            <td width="15%" align="right" class="labeltext" >Singer</td>
+                            <td width="10%"  align="left"><p:inputText id="contentsinger" value="#{contentUploadBean.newContent.singer}" disabled="#{contentUploadBean.isDisabled('SINGER')}" maxlength="50"  style="width: 170px;"/></td>
+                            <td width="15%" align="right" class="labeltext" >Transcode Before Delivery</td>
+                            <td width="25%"  align="left" class="labeltext" > <p:selectBooleanCheckbox id="transcodeflag" value="#{contentUploadBean.newContent.transcodeFlag}" disabled="#{contentUploadBean.isDisabled('TRANSCODE')}"  itemLabel=""  style="width:250px;vertical-align: middle;"/></td>
+                        </tr>
+                        <tr> <td class="infomsg" colspan="5" width="100%" align="center"> <hr/></td></tr>
+                        <tr>
+                            <td width="15%" align="right" class="labeltext" >Show Order</td>
+                            <td width="10%" align="left"> <p:inputText id="showOrder"  value="#{contentUploadBean.newContent.showOrder}" maxlength="2"  style="width: 50px;"/> </td>
+                            <td width="15%" align="right" class="labeltext" >Multipart Content</td>
+                            <td width="10%" align="left" class="labeltext" ><p:selectBooleanCheckbox id="multipartcontentchk" value="#{contentUploadBean.haveParts}" itemLabel=""  disabled="#{contentUploadBean.isDisabled('MULTIPART')}" style="width:170px;"/></td>
+                            <td class="infomsg"  width="50%" align="left"> <h:outputText class="infomsg" value="Show Order helps CMS to decide the Display Order of the content wherever sequential order of the content needs to be managed.  Select Multipart content if your content files are divided into more then one parts. If Multipart flag is on then you need to mention the part number inside the file name in following format &lt;contentName&gt;_&lt;width&gt;x&lt;height&gt;_&lt;PartNumber&gt;.&lt;file_extension&gt; e.g. abc_600x800_1.jpeg" style="width:400px;"/> </td>    
+                        </tr>
+
+                        <tr> <td class="infomsg" colspan="5" width="100%" align="center"> <hr/></td></tr>
+                        <tr>
+                            <td width="15%" align="right" class="labeltext" > Validity Start</td>
+                            <td width="10%" align="left"><p:calendar id="validitystart" value="#{contentUploadBean.newContent.validityStart}" effect="fold" pages="3"  pattern="yyyy-MM-dd"/></td>
+                            <td width="15%" align="right" class="labeltext" >Validity End</td>
+                            <td width="10%"  align="left"><p:calendar id="validityend" value="#{contentUploadBean.newContent.validityEnd}" effect="fold" pages="3"  pattern="yyyy-MM-dd"/></td>
+                            <td class="infomsg" width="50%" align="left"> <h:outputText class="infomsg" value="Content Validity helps system to determin if a content can be served or not. Please enter/select valid dates for start and end dates of the content validity." style="width:400px;"/> </td>
+                        </tr>
+
+                        <tr>
+                            <td width="100%" colspan="5" align="center">
+                                <h:outputText id="msgOut" class="#{contentUploadBean.statusMsg.msgClass}" value="#{contentUploadBean.statusMsg.message}" style="font-size: 10px; font-weight: bold; word-wrap: true;"/></td>
+                        </tr>
+
+                        <tr>
+                            <td width="15%" align="right"><p:commandButton id="printsubmit" update="" value="Print Content" action="#{contentUploadBean.printDetails()}" style="width:170px;"/></td>
+                            <td width="10%" align="center"><p:commandButton id="cntupload" value="Upload Files" action="#{contentUploadBean.uploadSingleContent()}" style="width:170px;"/></td>
+                            <td width="15%" align="center"><p:commandButton update="msgOut" id="cntclear" value="Clear Uploaded Files" action="#{contentUploadBean.clearUploadedFiles()}" style="width:170px;"/></td>
+                            <td width="10%" align="center"><p:commandButton id="cntsubmit" update="msgOut" value="Submit Content" action="#{contentUploadBean.commitContentDetails()}" style="width:170px;"/></td>
+                            <td width="50%" align="center"> &nbsp;</td>
+                        </tr>
+
+                    </table>
+
+
+                </h:form>
+
+            </ui:define>
+
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../home/header.xhtml">
+
+            <ui:define name="content">
+             
+                  <h:form id="frm1">
+                        <p:accordionPanel id="ap1">
+                             <p:tab title="Create  New Portlet">
+                <table width="100%">
+                                <tr>
+                                    <td width="10%"  align="right">Portal Name:</td>
+                                    <td  width="16%">
+                                        <p:selectOneMenu id="portal" value="#{portletManagerBean.selectedPortal}" style="width:170px;">
+                                                           <f:selectItem itemLabel="Select Portal Name" itemValue="null" />
+                                                           <f:selectItems value="#{portletManagerBean.portalList}"/>
+                                                    </p:selectOneMenu>
+                                                   
+                                                </td>
+                                    <td width="15%" align="right">  <h:outputLabel value="Portlet Name :" for="pname"/> </td>
+                                    <td width="18%" align="left"><p:inputText id="pname" value="#{portletManagerBean.portletName}" style="width:170px;"/></td>
+                                    <td width="15%" align="right"><h:outputLabel value="Portlet Description :" for="pdesc"/></td>
+                                    <td width="18%" align="left"> <p:inputText id="pdesc" value="#{portletManagerBean.portletsDescp}" style="width:170px;"/></td>
+                                   <td width="36%" align="right"> <p:commandButton value="Create Portlet"  update="msgOut" actionListener="#{portletManagerBean.submit}"  style="width:170px;"/></td>
+                                </tr>
+                   <tr>
+                       <td width="100%" colspan="6"><h:outputText id="msgOut" class="#{portletManagerBean.statusMsg.msgClass}" value="#{portletManagerBean.statusMsg.message}"/></td>
+                                            </tr>
+                 
+                </table>
+                             </p:tab>
+                             <p:tab title="View/Change Portlet Details">
+                                 <p:dataTable id="portletlist" var="portletdata" value="#{portletManagerBean.viewPortletList}" editable="true" paginator="true" rows="10" selectionMode="single" selection="#{portletManagerBean.selectedPortlet}" rowKey="#{portletdata.portlet_id}">
+                                <f:facet name="header">
+                                        List of Portlet  <p:commandButton value="Refresh Table Data" update="portletlist"  />
+                                </f:facet>
+                                <p:column style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Portlet Id" />
+                                    </f:facet>
+                                    <h:outputText value="#{portletdata.portlet_id}" />
+                                </p:column>
+                                     <p:column filterBy="#{portletdata.portlet_name}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Portlet Name" />
+                                    </f:facet>
+                                         <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{portletdata.portlet_name}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{portletdata.portlet_name}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+<!--                                <p:column filterBy="#{cmsuser.companyName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Portlet Desc" />
+                                    </f:facet>
+                                    <h:outputText value="#{cmsuser.companyName}" />
+                                </p:column>-->
+                                     <p:column filterBy="#{portletdata.portal_id}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Portal_Id" />
+                                    </f:facet>
+                                         <h:outputText value="#{portletdata.portal_id}" />
+                                </p:column>
+                                     <p:column filterBy="#{portletdata.status}" style="alignment-adjust: middle;alignment-baseline: central;" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Status." />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{portletdata.status}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{portletdata.status}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>
+<!--                                <p:column filterBy="#{cmsuser.email}" style="alignment-adjust: middle;alignment-baseline: central;" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Email" />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{cmsuser.email}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{cmsuser.email}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>-->
+<!--                                <p:column >
+                                    <f:facet name="header">
+                                        <h:outputText value=" Status" />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{cmsuser.statusString}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{cmsuser.status}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>-->
+                                
+<p:ajax event="rowEdit" listener="#{portletManagerBean.onEdit}" update="portletlist" />
+                               <p:column>
+                                    <p:rowEditor />
+                               </p:column>
+                            </p:dataTable>
+                                 
+                                 
+                        </p:tab>
+                        </p:accordionPanel>
+                  </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

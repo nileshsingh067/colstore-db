@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+        <ui:composition template="./../home/header.xhtml">
+            <ui:define name="content">
+                <h:form id="frm1">
+                    <p:accordionPanel id="ap1">
+                        <p:tab title="Register New Adnetwork">
+                            <table width="100%">
+                                
+                                <tr>
+                                    <td width="20%">Ad-Network Name : </td>
+                                    <td width="20%"><p:inputText id="newplatform" value="#{adnetworkBean.newAdnetwork.adnetworkName}"/></td>
+                                    <td width="20%">Ad-Network Description : </td>
+                                    <td width="20%"><p:inputText id="newplatformdescp" value="#{adnetworkBean.newAdnetwork.adnetworkDeac}"/></td>
+                                    <td width="20%"> <p:commandButton value="Submit" update="msgOut,platformlisttable" actionListener="#{adnetworkBean.createNew()}"/></td>
+                                </tr>
+                                <tr>
+                                    <td width="100%" colspan="5"><h:outputText id="msgOut" class="#{adnetworkBean.statusMsg.msgClass}" value="#{adnetworkBean.statusMsg.message}"/> </td>
+                                    
+                                </tr>
+                            </table>
+                        </p:tab>
+                        <p:tab title="View/Change Adnetwork Details">
+                            <p:commandButton value="Reload Adnetwork List" update="platformlisttable" actionListener="#{adnetworkBean.reloadList()}"/>
+                            <p:dataTable id="platformlisttable" var="platform" value="#{adnetworkBean.adnetworkList}" editable="true" paginator="true" rows="10" selectionMode="single" selection="#{adnetworkBean.selectedAdnetwork}" rowKey="#{platform.adnetworkId}">
+                                <f:facet name="header">
+                                        List of Available Ad-network
+                                </f:facet>
+                                <p:column style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Adnetwork Id" />
+                                    </f:facet>
+                                    <h:outputText value="#{platform.adnetworkId}" />
+                                </p:column>
+                                <p:column filterBy="#{platform.adnetworkName}" style="alignment-adjust: middle;alignment-baseline: central;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Adnetwork Name" />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                           <h:outputText value="#{platform.adnetworkName}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                           <h:outputText value="#{platform.adnetworkName}" />
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column >
+                                    <f:facet name="header">
+                                        <h:outputText value="Adnetwork Status" />
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{platform.statusString}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText value="#{platform.status}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>
+                                <p:ajax event="rowEdit" listener="#{adnetworkBean.onEdit}" update="platformlisttable" />
+                               <p:column>
+                                    <p:rowEditor />
+                               </p:column>
+                            </p:dataTable>
+                            
+                        </p:tab>
+                    </p:accordionPanel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
