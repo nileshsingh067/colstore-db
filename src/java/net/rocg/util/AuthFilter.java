@@ -68,7 +68,7 @@ public class AuthFilter implements Filter {
             }else if ( reqURI.indexOf("/faces/index.xhtml") >= 0||loginBean!=null||reqURI.contains("javax.faces.resource")){
                 System.out.println("AuthFilter::doFilter:: Valid Session") ;  
                 String newsessionId="JCMS-SESSION-"+System.currentTimeMillis()+(Math.random()*999999);
-                newsessionId=RUtil.getBase64EncodedString(newsessionId);
+                newsessionId=NUtil.getBase64EncodedString(newsessionId);
                 Cookie newCookie=new Cookie("JSESSIONID",newsessionId);
                 res.addCookie(newCookie);
                 chain.doFilter(request, response);
