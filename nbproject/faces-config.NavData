@@ -4,14 +4,14 @@
     <Scope Scope="Project">
         <Node id="ui/reports/contentdashboard.xhtml" x="650" y="750" zoom="true"/>
         <Node id="ui/content/processbulkcontent.xhtml" x="650" y="300" zoom="true"/>
-        <Node id="ui/cc/customercare.xhtml" x="400" y="300" zoom="true"/>
         <Node id="welcomePrimefaces.xhtml" x="900" y="600" zoom="true"/>
+        <Node id="ui/cc/customercare.xhtml" x="400" y="300" zoom="true"/>
         <Node id="ui/reports/portaldashboard.xhtml" x="900" y="750" zoom="true"/>
         <Node id="ui/portalconfig/newportlet.xhtml" x="900" y="450" zoom="true"/>
         <Node id="ui/config/ratingrulemgr.xhtml" x="1400" y="450" zoom="true"/>
-        <Node id="ui/home/header.xhtml" x="650" y="600" zoom="false"/>
         <Node id="ui/portalconfig/contentconfig_hp.xhtml" x="400" y="150" zoom="true"/>
         <Node id="ui/portalconfig/viewportlet.xhtml" x="1150" y="300" zoom="true"/>
+        <Node id="ui/home/header.xhtml" x="650" y="600" zoom="false"/>
         <Node id="ui/config/servicemgr.xhtml" x="150" y="1050" zoom="true"/>
         <Node id="ui/config/opseriesmgr.xhtml" x="400" y="900" zoom="true"/>
         <Node id="ui/reports/operator_reports.xhtml" x="400" y="750" zoom="true"/>
@@ -19,18 +19,18 @@
         <Node id="ui/config/ratingenginemgr.xhtml" x="150" y="450" zoom="true"/>
         <Node id="ui/content/searchcontent.xhtml" x="1650" y="150" zoom="true"/>
         <Node id="ui/content/bulkupload.xhtml" x="650" y="450" zoom="true"/>
-        <Node id="ui/config/categorymgr.xhtml" x="1150" y="150" zoom="true"/>
         <Node id="ui/content/uploadcontent.xhtml" x="1150" y="600" zoom="true"/>
+        <Node id="ui/config/categorymgr.xhtml" x="1150" y="150" zoom="true"/>
         <Node id="ui/portalconfig/newtemplate.xhtml" x="1150" y="750" zoom="true"/>
         <Node id="ui/portalconfig/viewtemplate.xhtml" x="150" y="300" zoom="true"/>
         <Node id="ui/home/index.xhtml" x="650" y="150" zoom="false"/>
         <Node id="ui/portalconfig/contentconfig.xhtml" x="1400" y="300" zoom="true"/>
-        <Node id="ui/config/usermgr.xhtml" x="1650" y="300" zoom="true"/>
         <Node id="ui/portalconfig/campaignconfig.xhtml" x="400" y="450" zoom="true"/>
+        <Node id="ui/config/usermgr.xhtml" x="1650" y="300" zoom="true"/>
         <Node id="ui/portalconfig/newportal.xhtml" x="900" y="300" zoom="true"/>
-        <Node id="ui/config/platformmgr.xhtml" x="400" y="600" zoom="true"/>
-        <Node id="index.xhtml" x="400" y="1050" zoom="true"/>
         <Node id="ui/content/approvecontent.xhtml" x="1900" y="150" zoom="true"/>
+        <Node id="index.xhtml" x="400" y="1050" zoom="true"/>
+        <Node id="ui/config/platformmgr.xhtml" x="400" y="600" zoom="true"/>
         <Node id="ui/portalconfig/change_hp_banners.xhtml" x="1400" y="150" zoom="true"/>
         <Node id="ui/config/opcirclemgr.xhtml" x="150" y="900" zoom="true"/>
         <Node id="ui/reports/service_reports.xhtml" x="900" y="150" zoom="true"/>
@@ -39,8 +39,8 @@
         <Node id="tempreports.jsp" x="150" y="1200" zoom="true"/>
         <Node id="ui/config/countrymgr.xhtml" x="1650" y="450" zoom="true"/>
         <Node id="ui/reports/systemdashboard.xhtml" x="650" y="900" zoom="true"/>
-        <Node id="ui/portalconfig/uploadTemplateFiles.xhtml" x="1400" y="600" zoom="true"/>
         <Node id="ui/portalconfig/viewportal.xhtml" x="2150" y="150" zoom="true"/>
+        <Node id="ui/portalconfig/uploadTemplateFiles.xhtml" x="1400" y="600" zoom="true"/>
         <Node id="ui/content/uploadcontentfiles.xhtml" x="1150" y="450" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
