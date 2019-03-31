@@ -19,6 +19,7 @@ import net.colstore.web.model.ColList;
 import net.colstore.web.model.DbList;
 import net.colstore.web.model.Node;
 import net.colstore.web.model.TableList;
+import org.primefaces.model.CheckboxTreeNode;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
@@ -53,20 +54,46 @@ public class NodeService {
         //dynamic db list
         List<DbList> dbList=dbListDAO.getDbList(this.getUserId());
         for(DbList db:dbList){
-             TreeNode Nodes = new DefaultTreeNode(new Node(db.getDb_name(), "-", "Folder"), root);
+             TreeNode Nodes = new DefaultTreeNode(new Node(db.getDb_name(), "-", "DB"), root);
              List<TableList> tblList=tblListDAO.getTblList(db.getId());
              for(TableList table:tblList){
-                 TreeNode nodesTable = new DefaultTreeNode(new Node(table.getTbl_name(), "-", "Folder"), Nodes);
+                 TreeNode nodesTable = new DefaultTreeNode(new Node(table.getTbl_name(), "-", "Table"), Nodes);
                  List<ColList> colList=colListDAO.getColumnList(table.getId());
                  for(ColList column:colList){
-                     TreeNode nodesColumn = new DefaultTreeNode(new Node(column.getCol_name(), "-", "Word Document"), nodesTable);
+                     TreeNode nodesColumn = new DefaultTreeNode(new Node(column.getCol_name(), "-", "Column"), nodesTable);
                  }
                  nodesTable=null;
              }
+             TreeNode CreateNewTable = new CheckboxTreeNode(new Node("Create New Table", "-", "Table"), Nodes);
         }
+        TreeNode CreateNewDb = new CheckboxTreeNode(new Node("Create New DB", "-", "DB"), root);
         return root;
     }
     
+    public TreeNode createCheckboxDocuments() {
+        fetchLoginDetails();
+         System.out.println("NodeService  :: createDocuments");
+        TreeNode root = new CheckboxTreeNode(new Node("Files", "-", "Folder"), null);
+        //dynamic db list
+        List<DbList> dbList=dbListDAO.getDbList(this.getUserId());
+        
+        
+        for(DbList db:dbList){
+             TreeNode Nodes = new CheckboxTreeNode(new Node(db.getDb_name(), "-", "Folder"), root);
+             List<TableList> tblList=tblListDAO.getTblList(db.getId());
+             for(TableList table:tblList){
+                 TreeNode nodesTable = new CheckboxTreeNode(new Node(table.getTbl_name(), "-", "Folder"), Nodes);
+                 List<ColList> colList=colListDAO.getColumnList(table.getId());
+                 for(ColList column:colList){
+                     TreeNode nodesColumn = new CheckboxTreeNode(new Node(column.getCol_name(), "-", "Word Document"), nodesTable);
+                 }
+                 nodesTable=null;
+             }
+             TreeNode CreateNewTable = new CheckboxTreeNode(new Node("Create New", "-", "Folder"), Nodes);
+        }
+        TreeNode CreateNewDb = new CheckboxTreeNode(new Node("Create New", "-", "Folder"), root);
+        return root;
+    }
         public boolean fetchLoginDetails(){
         boolean flag=false;
         LoginBean loginBeanObj=null;

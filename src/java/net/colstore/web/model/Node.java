@@ -9,7 +9,7 @@ package net.colstore.web.model;
  *
  * @author nilesh
  */
-public class Node {
+public class Node implements java.io.Serializable{
     private String name;
      
     private String size;

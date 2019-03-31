@@ -48,22 +48,13 @@
             <div id="left">
                 <!--ui:insert name="left">Left</ui:insert-->
                 <h:form id="left_menu_form">
-                    <p:tree value="#{rMenuBuilder.root}" var="doc">
+                    <p:tree value="#{rMenuBuilder.root}" var="doc" selectionMode="single"
+                                    selection="#{rMenuBuilder.selectedNode}">
                         <p:treeNode expandedIcon="pi pi-folder-open" collapsedIcon="pi pi-folder">
-                            <h:outputText value="#{doc.name}"/>
+                            <h:outputText value="#{doc.name}-#{doc.type}"/>
                         </p:treeNode>
 
-                        <p:treeNode type="Nodes" icon="pi pi-file">
-                            <h:outputText value="#{doc.name}" />
-                        </p:treeNode>
-
-                        <p:treeNode type="nodesTable" icon="pi pi-image">
-                            <h:outputText value="#{doc.name}" />
-                        </p:treeNode>
-
-                        <p:treeNode type="nodesColumn" icon="pi pi-video">
-                            <h:outputText value="#{doc.name}" />
-                        </p:treeNode>
+                       
                     </p:tree>
                 </h:form>
             </div>

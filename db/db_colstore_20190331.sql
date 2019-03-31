@@ -33,7 +33,7 @@ CREATE TABLE `db_tbllist` (
   PRIMARY KEY (`id`),
   KEY `fk_db_id_idx` (`db_id`),
   CONSTRAINT `fk_db_id` FOREIGN KEY (`db_id`) REFERENCES `tb_dblist` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,7 +64,7 @@ CREATE TABLE `tb_collist` (
   PRIMARY KEY (`id`),
   KEY `fk_tb_collist_1_idx` (`tbl_id`),
   CONSTRAINT `fk_tb_collist` FOREIGN KEY (`tbl_id`) REFERENCES `db_tbllist` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +93,7 @@ CREATE TABLE `tb_dblist` (
   `last_update` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_tb_dblist_1_idx` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

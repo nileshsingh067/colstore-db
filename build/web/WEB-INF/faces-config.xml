@@ -10,35 +10,7 @@
             <to-view-id>/ui/home/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/ui/content/uploadcontent.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>addcontent</from-outcome>
-            <to-view-id>/ui/content/uploadcontentfiles.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/ui/content/bulkupload_confirm.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>bulkupload</from-outcome>
-            <to-view-id>/ui/content/bulkupload.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <managed-bean>
-        <managed-bean-name>viewContentMBean</managed-bean-name>
-        <managed-bean-class>net.colstore.web.mbeans.ViewContentMBean</managed-bean-class>
     
-        <managed-bean-scope>session</managed-bean-scope></managed-bean>
-    <managed-bean>
-        <managed-bean-name>ratingEngineBean</managed-bean-name>
-        <managed-bean-class>net.colstore.web.mbeans.RatingEngineBean</managed-bean-class>
-    
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
-    <managed-bean>
-        <managed-bean-name>campaignManagerBean</managed-bean-name>
-        <managed-bean-class>net.colstore.web.mbeans.CampaignManagerBean</managed-bean-class>
-    
-        <managed-bean-scope>session</managed-bean-scope></managed-bean>
     <navigation-rule>
         <from-view-id>/ui/home/header.xhtml</from-view-id>
         <navigation-case>
@@ -46,14 +18,5 @@
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    <managed-bean>
-        <managed-bean-name>html5gamebulkupload</managed-bean-name>
-        <managed-bean-class>net.colstore.web.mbeans.html5gamebulkupload</managed-bean-class>
-    
-        <managed-bean-scope>session</managed-bean-scope></managed-bean>
-    <managed-bean>
-        <managed-bean-name>html5gamebulkupload1</managed-bean-name>
-        <managed-bean-class>net.colstore.web.mbeans.html5gamebulkupload</managed-bean-class>
-    
-        <managed-bean-scope>session</managed-bean-scope></managed-bean>
+  
 </faces-config>

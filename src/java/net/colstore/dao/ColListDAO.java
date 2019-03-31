@@ -39,7 +39,7 @@ public class ColListDAO extends DBConnection implements Serializable{
                     newCol.setCol_dataType(rs.getString("col_dataType"));
                     newCol.setStatus(rs.getInt("status"));
                     newCol.setCreated_on(rs.getString("created_on"));
-                    newCol.setLast_updated(rs.getString("last_update"));
+                    newCol.setLast_updated(rs.getString("last_updated"));
                     colList.add(newCol);
                     newCol=null;
                 }

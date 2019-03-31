@@ -20,6 +20,7 @@ import net.colstore.util.DBConnection;
 import net.colstore.util.RLogger;
 import net.colstore.web.mbeans.RMenuItem;
 import net.colstore.web.service.NodeService;
+import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.model.TreeNode;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
@@ -40,6 +41,7 @@ public class RMenuBuilder  implements java.io.Serializable{
     String userName;
     MenuModel model;
       private TreeNode root;
+      private TreeNode selectedNode;
      
     @ManagedProperty("#{nodeService}")
     private NodeService service;
@@ -267,7 +269,11 @@ public class RMenuBuilder  implements java.io.Serializable{
         loginBeanObj=null;
         return flag;
     }
-  
+    public void onNodeSelect(NodeSelectEvent event) {
+      //  FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", event.getTreeNode().toString());
+        //FacesContext.getCurrentInstance().addMessage(null, message);
+        System.out.println("onNodeSelect() :: "+event.getTreeNode().getData().toString());
+    }
     public MenuModel getModel() {
         if(model==null) this.buildMenu();
         return model;
@@ -327,6 +333,14 @@ public class RMenuBuilder  implements java.io.Serializable{
     
      public void setService(NodeService service) {
         this.service = service;
+    }
+
+    public TreeNode getSelectedNode() {
+        return selectedNode;
+    }
+
+    public void setSelectedNode(TreeNode selectedNode) {
+        this.selectedNode = selectedNode;
     }
     
 }
