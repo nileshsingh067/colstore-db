@@ -46,17 +46,8 @@
         <p:spacer height="10px;"/>
         <div>
             <div id="left">
-                <!--ui:insert name="left">Left</ui:insert-->
-                <h:form id="left_menu_form">
-                    <p:tree value="#{rMenuBuilder.root}" var="doc" selectionMode="single"
-                                    selection="#{rMenuBuilder.selectedNode}">
-                        <p:treeNode expandedIcon="pi pi-folder-open" collapsedIcon="pi pi-folder">
-                            <h:outputText value="#{doc.name}-#{doc.type}"/>
-                        </p:treeNode>
-
-                       
-                    </p:tree>
-                </h:form>
+                <ui:insert name="left">Left</ui:insert>
+              
             </div>
             <div id="content" class="left_content">
                 <ui:insert name="content">Content</ui:insert>
@@ -67,7 +58,7 @@
         </div-->
 
         <div id="bottom" class="bannerheadsmall">
-            Copyright © 2019 by RC@IIITB
+            Copyright © 2019 by DM@IIITB
 
         </div>
 

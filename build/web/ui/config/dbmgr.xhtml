@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../home/header.xhtml">
+
+            <ui:define name="content">
+                <h:form id="frm1">
+                    <p:accordionPanel id="ap1">
+                        <p:tab title="Create New Database">
+                                        <table width="100%" align="left">
+                                            <tr><td colspan="6" width="100%"><hr/></td></tr>
+                                            <tr>
+                                                <td width="16%" align="right"> <h:outputLabel value="Database Name :" for="dbname"/></td>
+                                                <td width="16%" ><p:inputText id="dbname" value="#{databaseManagerBean.newDb.db_name}" style="width:170px;"/></td>
+                                                <td width="16%" align="right"></td>
+                                                <td width="16%"></td>
+                                                <td width="30%" align="right"> </td>
+                                                <td width="36%" align="right" colspan="2"> <p:commandButton value="Submit" update="msgOut,dbname,:left_menu_form:tmenu" actionListener="#{databaseManagerBean.createNew()}" style="width:170px;"/></td>
+                                            </tr>
+                                            <tr><td colspan="6" width="100%"><hr/></td></tr>
+                                            <tr>
+                                                <td width="100%" colspan="6"><h:outputText id="msgOut"  value="#{databaseManagerBean.msg}"/></td>
+                                            </tr>
+                                        </table>
+                        </p:tab>
+                        <p:tab title="View/Change Database Details">
+                        
+                        </p:tab>
+                    </p:accordionPanel>
+                </h:form>
+            </ui:define>
+              <ui:define name="left">
+                  <h:form id="left_menu_form">
+                     <p:growl id="messages" showDetail="true" />
+                    <p:tree id="tmenu" value="#{rMenuBuilder.root}" var="doc" selectionMode="single"
+                            selection="#{rMenuBuilder.selectedNode}">
+<!--                        <p:ajax event="select" update=":left_menu_form:messages" listener="#{rMenuBuilder.onNodeSelect}" />-->
+                        <p:treeNode expandedIcon="pi pi-folder-open" collapsedIcon="pi pi-folder">
+<!--                            <h:outputText value="#{doc.name}-#{doc.type}"/>-->
+                            <h:outputLink value="#{doc.url}">#{doc.name}-#{doc.type}</h:outputLink>
+<!--                            <p:commandButton value="#{doc.name}" action="#{rMenuBuilder.treeNodeListener()}"  id="treeNode"/> -->
+                        </p:treeNode>
+                        <!--p:treeNode type="DB" icon="pi pi-file">
+                            <h:outputText value="#{doc.name}" />
+                        </p:treeNode>
+
+                        <p:treeNode type="Table" icon="pi pi-image">
+                            <h:outputText value="#{doc.name}" />
+                        </p:treeNode>
+
+                        <p:treeNode type="Column" icon="pi pi-video">
+                            <h:outputText value="#{doc.name}" />
+                        </p:treeNode-->
+
+                    </p:tree>
+                </h:form>
+            </ui:define>
+          
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -15,11 +15,12 @@ public class Node implements java.io.Serializable{
     private String size;
      
     private String type;
-
-    public Node(String name, String size, String type) {
+    private String url;
+    public Node(String name, String size, String type,String url) {
         this.name = name;
         this.size = size;
         this.type = type;
+        this.url=url;
     }
 
     @Override
@@ -51,6 +52,14 @@ public class Node implements java.io.Serializable{
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
     
     

@@ -58,4 +58,25 @@ public class DbListDAO extends DBConnection implements Serializable{
         }
         return dbList;
     }
+     public boolean createNewDB(DbList newDb){
+         boolean flag=false; 
+         Connection conn=connect();
+        String sql1="insert into tb_dblist (user_id,db_name,status,created_on,last_update)  values("+newDb.getUser_id()+",'"+newDb.getDb_name()+"',1,now(),now());";
+        if(conn!=null){
+            try{
+                flag=conn.createStatement().execute(sql1);
+                 logMsg(RLogger.MSG_TYPE_INFO,RLogger.LOGGING_LEVEL_INFO,"DbListDAO.class :: createNewDB() :: sql : "+sql1+", result : "+flag);
+            }catch(Exception e){
+                logMsg(RLogger.MSG_TYPE_ERROR,RLogger.LOGGING_LEVEL_ERROR,"DbListDAO.class :: createNewDB() :: sql : "+sql1+", Exception "+e);
+            }finally{
+                try{
+                    if(conn!=null) conn.close();
+                }catch(Exception ee){}
+                conn=null;
+            }
+        }else{
+            logMsg(RLogger.MSG_TYPE_ERROR,RLogger.LOGGING_LEVEL_ERROR,"DbListDAO.class :: getDbList() :: sql : "+sql1+", Failed to connect Database.");
+        }
+         return flag;
+     }
 }

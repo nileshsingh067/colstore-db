@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -17,16 +19,32 @@
             <br></br>
             <br></br>
             </ui:define>
-            <!--ui:define name="left">
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            </ui:define-->
+            <ui:define name="left">
+                  <h:form id="left_menu_form">
+                     <p:growl id="messages" showDetail="true" />
+                    <p:tree value="#{rMenuBuilder.root}" var="doc" selectionMode="single"
+                            selection="#{rMenuBuilder.selectedNode}">
+<!--                        <p:ajax event="select" update=":left_menu_form:messages" listener="#{rMenuBuilder.onNodeSelect}" />-->
+                        <p:treeNode expandedIcon="pi pi-folder-open" collapsedIcon="pi pi-folder">
+<!--                            <h:outputText value="#{doc.name}-#{doc.type}"/>-->
+                            <h:outputLink value="#{doc.url}">#{doc.name}-#{doc.type}</h:outputLink>
+<!--                            <p:commandButton value="#{doc.name}" action="#{rMenuBuilder.treeNodeListener()}"  id="treeNode"/> -->
+                        </p:treeNode>
+                        <!--p:treeNode type="DB" icon="pi pi-file">
+                            <h:outputText value="#{doc.name}" />
+                        </p:treeNode>
+
+                        <p:treeNode type="Table" icon="pi pi-image">
+                            <h:outputText value="#{doc.name}" />
+                        </p:treeNode>
+
+                        <p:treeNode type="Column" icon="pi pi-video">
+                            <h:outputText value="#{doc.name}" />
+                        </p:treeNode-->
+
+                    </p:tree>
+                </h:form>
+            </ui:define>
 
             <ui:define name="bottom">
                 bottom of the page

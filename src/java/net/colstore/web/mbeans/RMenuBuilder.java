@@ -191,7 +191,9 @@ public class RMenuBuilder  implements java.io.Serializable{
         }
         
     }
-    
+    public void treeNodeListener(){
+        System.out.println("tree node :: "+this.selectedNode.toString());
+    }
     public List<RMenuItem> getMenuList(Statement st,int parentMenu){
         List<RMenuItem> menuList=new ArrayList<RMenuItem>();
        java.sql.ResultSet rs=null;
@@ -235,7 +237,7 @@ public class RMenuBuilder  implements java.io.Serializable{
             try{
              FacesContext ctx = FacesContext.getCurrentInstance();
              ExternalContext extCtx = ctx.getExternalContext();
-             extCtx.redirect("/jcms-web/faces/index.xhtml");
+             extCtx.redirect("/colstore-db/faces/index.xhtml");
             }catch(Exception e){
                 System.out.println("Exception in checkSessionState "+e);
             }
@@ -243,6 +245,7 @@ public class RMenuBuilder  implements java.io.Serializable{
         if(fetchLoginDetails()){
           model=new DefaultMenuModel();
             buildMenu();
+            
         }else{
             //show default Menu without any access
             System.out.println("Session Expited Unable to build Meniu");

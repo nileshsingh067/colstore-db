@@ -10,7 +10,7 @@ package net.colstore.web.model;
  * @author nilesh
  */
 //select id,user_id,db_name,status,created_on,last_update from tb_dblist where user_id=2;
-public class DbList {
+public class DbList implements java.io.Serializable{
     private int id;
     private int user_id;
     private String db_name;
