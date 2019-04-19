@@ -46,8 +46,31 @@
         <p:spacer height="10px;"/>
         <div>
             <div id="left">
-                <ui:insert name="left">Left</ui:insert>
-              
+                <!--ui:insert name="left">Left</ui:insert-->
+                     <h:form id="left_menu_form">
+                    <p:growl id="messages" showDetail="true" />
+                    <p:tree id="tmenu" value="#{rMenuBuilder.root}" var="doc" selectionMode="single"
+                            selection="#{tableManagerBean.selectedNode}">
+<!--                        <p:ajax event="select" update=":left_menu_form:messages" listener="#{rMenuBuilder.onNodeSelect}" />-->
+                        <p:treeNode id="tnode" expandedIcon="pi pi-folder-open" collapsedIcon="pi pi-folder">
+<!--                            <h:outputText value="#{doc.name}-#{doc.type}"/>-->
+                            <h:outputLink value="#{doc.url}">#{doc.name}-#{doc.type}</h:outputLink>
+<!--                            <p:commandButton value="#{doc.name}" action="#{rMenuBuilder.treeNodeListener()}"  id="treeNode"/> -->
+                        </p:treeNode>
+                        <!--p:treeNode type="DB" icon="pi pi-file">
+                            <h:outputText value="#{doc.name}" />
+                        </p:treeNode>
+
+                        <p:treeNode type="Table" icon="pi pi-image">
+                            <h:outputText value="#{doc.name}" />
+                        </p:treeNode>
+
+                        <p:treeNode type="Column" icon="pi pi-video">
+                            <h:outputText value="#{doc.name}" />
+                        </p:treeNode-->
+
+                    </p:tree>
+                </h:form>
             </div>
             <div id="content" class="left_content">
                 <ui:insert name="content">Content</ui:insert>

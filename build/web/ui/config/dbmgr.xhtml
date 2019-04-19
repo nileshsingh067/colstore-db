@@ -37,30 +37,15 @@
                 </h:form>
             </ui:define>
               <ui:define name="left">
-                  <h:form id="left_menu_form">
+                  <!--h:form id="left_menu_form">
                      <p:growl id="messages" showDetail="true" />
                     <p:tree id="tmenu" value="#{rMenuBuilder.root}" var="doc" selectionMode="single"
                             selection="#{rMenuBuilder.selectedNode}">
-<!--                        <p:ajax event="select" update=":left_menu_form:messages" listener="#{rMenuBuilder.onNodeSelect}" />-->
                         <p:treeNode expandedIcon="pi pi-folder-open" collapsedIcon="pi pi-folder">
-<!--                            <h:outputText value="#{doc.name}-#{doc.type}"/>-->
                             <h:outputLink value="#{doc.url}">#{doc.name}-#{doc.type}</h:outputLink>
-<!--                            <p:commandButton value="#{doc.name}" action="#{rMenuBuilder.treeNodeListener()}"  id="treeNode"/> -->
                         </p:treeNode>
-                        <!--p:treeNode type="DB" icon="pi pi-file">
-                            <h:outputText value="#{doc.name}" />
-                        </p:treeNode>
-
-                        <p:treeNode type="Table" icon="pi pi-image">
-                            <h:outputText value="#{doc.name}" />
-                        </p:treeNode>
-
-                        <p:treeNode type="Column" icon="pi pi-video">
-                            <h:outputText value="#{doc.name}" />
-                        </p:treeNode-->
-
                     </p:tree>
-                </h:form>
+                </h:form-->
             </ui:define>
           
 

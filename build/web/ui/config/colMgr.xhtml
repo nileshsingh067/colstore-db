@@ -13,8 +13,8 @@
             <ui:define name="content">
                 <h:form id="frm1">
                     <p:accordionPanel id="ap1">
-                        <p:tab title="Create New Database">
-                                        <table width="100%" align="left">
+                        <p:tab title="Create New Table">
+                                <table width="100%" align="left">
                                             <tr><td colspan="6" width="100%"><hr/></td></tr>
                                             <tr>
                                                 <td width="16%" align="right"> <h:outputLabel value="Database Name :" for="dbname"/></td>
@@ -28,24 +28,39 @@
                                             <tr>
                                                 <td width="100%" colspan="6"><h:outputText id="msgOut"  value="#{databaseManagerBean.msg}"/></td>
                                             </tr>
-                                        </table>
+                                        </table>       
                         </p:tab>
-                        <p:tab title="View/Change Database Details">
+                        <p:tab title="View/Change Table Details">
                         
                         </p:tab>
                     </p:accordionPanel>
                 </h:form>
             </ui:define>
-              <ui:define name="left">
-                  <!--h:form id="left_menu_form">
+            <ui:define name="left">
+                  <h:form id="left_menu_form">
                      <p:growl id="messages" showDetail="true" />
                     <p:tree id="tmenu" value="#{rMenuBuilder.root}" var="doc" selectionMode="single"
-                            selection="#{rMenuBuilder.selectedNode}">
+                            selection="#{tableManagerBean.selectedNode}">
+<!--                        <p:ajax event="select" update=":left_menu_form:messages" listener="#{rMenuBuilder.onNodeSelect}" />-->
                         <p:treeNode expandedIcon="pi pi-folder-open" collapsedIcon="pi pi-folder">
+<!--                            <h:outputText value="#{doc.name}-#{doc.type}"/>-->
                             <h:outputLink value="#{doc.url}">#{doc.name}-#{doc.type}</h:outputLink>
+<!--                            <p:commandButton value="#{doc.name}" action="#{rMenuBuilder.treeNodeListener()}"  id="treeNode"/> -->
                         </p:treeNode>
+                        <!--p:treeNode type="DB" icon="pi pi-file">
+                            <h:outputText value="#{doc.name}" />
+                        </p:treeNode>
+
+                        <p:treeNode type="Table" icon="pi pi-image">
+                            <h:outputText value="#{doc.name}" />
+                        </p:treeNode>
+
+                        <p:treeNode type="Column" icon="pi pi-video">
+                            <h:outputText value="#{doc.name}" />
+                        </p:treeNode-->
+
                     </p:tree>
-                </h:form-->
+                </h:form>
             </ui:define>
           
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ColstoreDB xmlns="http://www.iiitb.ac.in/DS603/MT2018069/Colstore"
+		       xmlns:table="http://www.iiitb.ac.in/DS603/MT2018069/table"
+		       xmlns:column="http://www.iiitb.ac.in/DS603/MT2018069/column">
+	<DBDetails>
+		<Name>Demo</Name>
+	</DBDetails>
+	<table:Table_Details>
+		<table:name>Tb_User</table:name>
+		<column:Column_Details><column:attributes>
+				<column:attribute_name>Id</column:attribute_name>	
+				<column:dataType>INT</column:dataType>		
+			</column:attributes><column:attributes>
+				<column:attribute_name>UserName</column:attribute_name>	
+				<column:dataType>STRING</column:dataType>		
+			</column:attributes><column:attributes>
+				<column:attribute_name>Passwoed</column:attribute_name>	
+				<column:dataType>STRING</column:dataType>		
+			</column:attributes><column:attributes>
+				<column:attribute_name>LoginStatus</column:attribute_name>	
+				<column:dataType>STRING</column:dataType>		
+			</column:attributes></column:Column_Details>
+	</table:Table_Details>
+</ColstoreDB>

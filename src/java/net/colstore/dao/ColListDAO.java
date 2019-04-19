@@ -60,4 +60,26 @@ public class ColListDAO extends DBConnection implements Serializable{
         }
         return colList;
     }
+    public boolean createNewColumn(ColList newCol){
+         boolean flag=false; 
+         int res=0;
+         Connection conn=connect();
+        String sql1="insert into tb_collist (tbl_id,col_name,col_dataType,status,created_on,last_updated)values("+newCol.getTbl_id()+",'"+newCol.getCol_name()+"','"+newCol.getCol_dataType()+"',1,now(),now());";
+        if(conn!=null){
+            try{
+                res=conn.createStatement().executeUpdate(sql1);
+                 logMsg(RLogger.MSG_TYPE_INFO,RLogger.LOGGING_LEVEL_INFO,"ColListDAO.class :: createNewColumn() :: sql : "+sql1+", result : "+res);
+            }catch(Exception e){
+                logMsg(RLogger.MSG_TYPE_ERROR,RLogger.LOGGING_LEVEL_ERROR,"ColListDAO.class :: createNewColumn() :: sql : "+sql1+", Exception "+e);
+            }finally{
+                try{
+                    if(conn!=null) conn.close();
+                }catch(Exception ee){}
+                conn=null;
+            }
+        }else{
+            logMsg(RLogger.MSG_TYPE_ERROR,RLogger.LOGGING_LEVEL_ERROR,"ColListDAO.class :: createNewColumn() :: sql : "+sql1+", Failed to connect Database.");
+        }
+         return res>0?true:false;
+     }
 }

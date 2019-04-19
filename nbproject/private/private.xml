@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>web/ui/config/tblmgr.xhtml</url>
+            <bookmark id="1">
+                <name/>
+                <line>79</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="nmro"/>
         <group>
             <file>file:/home/nilesh/NetBeansProjects/colstore-db/src/java/net/colstore/web/mbeans/TableManagerBean.java</file>
             <file>file:/home/nilesh/NetBeansProjects/colstore-db/web/ui/config/tblmgr.xhtml</file>
-            <file>file:/home/nilesh/NetBeansProjects/colstore-db/src/java/net/colstore/web/model/DbList.java</file>
+            <file>file:/home/nilesh/NetBeansProjects/colstore-db/src/java/net/colstore/file/processor/DBHandler.java</file>
             <file>file:/home/nilesh/NetBeansProjects/colstore-db/src/java/net/colstore/web/mbeans/DatabaseManagerBean.java</file>
+            <file>file:/home/nilesh/NetBeansProjects/colstore-db/web/ui/config/dbmgr.xhtml</file>
         </group>
     </open-files>
 </project-private>

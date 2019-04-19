@@ -13,6 +13,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import net.colstore.dao.DbListDAO;
+import net.colstore.file.processor.DBHandler;
 import net.colstore.util.DBConnection;
 import net.colstore.util.RLogger;
 import net.colstore.web.model.DbList;
@@ -56,10 +57,17 @@ public class DatabaseManagerBean implements java.io.Serializable{
     fetchLoginDetails();
     temp.setUser_id(this.getUserId());
     temp.setDb_name(this.newDb.getDb_name());
-    DbListDAO dbdao=new DbListDAO();
-    boolean flag=dbdao.createNewDB(temp);
-    this.newDb.setDb_name("");
-    this.setMsg("Created !! "+flag);
+    DBHandler dbHandler=new DBHandler();
+    if(dbHandler.createDatabase(this.getUserId(), temp.getDb_name())){
+        DbListDAO dbdao=new DbListDAO();
+        boolean flag=dbdao.createNewDB(temp);
+        this.newDb.setDb_name("");
+        this.setMsg("Created !! "+flag);
+    }else{
+        this.newDb.setDb_name("");
+        this.setMsg("Database Creation failed.");
+    }
+    
     
     }
     public boolean fetchLoginDetails(){

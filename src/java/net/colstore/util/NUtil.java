@@ -27,22 +27,22 @@ import org.apache.commons.codec.binary.Base64;
 public class NUtil {
     public static int FIELD_TYPE_WIDTH=1,FIELD_TYPE_HEIGHT=2,FIELD_TYPE_PARTNUMBER=3,FIELD_TYPE_FILE_EXTENSION=4,FIELD_TYPE_FILE_NAME_PREFIX=5,FIELD_TYPE_FILE_NAME=6;
     public static int BULK_UPLOAD_COUNTER=1;
-    public static Properties cmsProps;
-   /* static{
+    public static Properties dbProps;
+   static{
         try{
-            InputStream is=(InputStream)Class.forName("net.colstore.util.NUtil").getResourceAsStream("/cmsprops.properties");
-            cmsProps=new Properties();
-            cmsProps.load(is);
+            InputStream is=(InputStream)Class.forName("net.colstore.util.NUtil").getResourceAsStream("/dbprops.properties");
+            dbProps=new Properties();
+            dbProps.load(is);
         }catch(Exception e){
             System.out.println("RUtil.class :: Exception in static block :: "+e.getMessage());
         }
     }
-    */
+    
     public static java.sql.Connection getDirectConnection(){
         Connection conn=null;
         try{
          Class.forName("com.mysql.jdbc.Driver");
-         conn=java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/jiffycmsv2","cgwuiusr","cgwuiusr@PWD");
+         conn=java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/db_colstore","root","admin");
         }catch(Exception e){
         }
         return conn;
@@ -140,18 +140,7 @@ public class NUtil {
         return flag;
     }
     
-    public static String getContentPath(String basePath,String contentType,String category,String catalogNumber,String dateString){
-        basePath=(basePath==null)?"/opt/":basePath.trim();
-        StringBuilder path=new StringBuilder(basePath.endsWith("/")?basePath:basePath+"/");
-        path.append((contentType==null)?"BLANKCT":contentType.toUpperCase().trim()).append("/");
-        path.append((category==null)?"BLANKCATG":category.toUpperCase().trim()).append("/");
-        path.append((dateString==null)?"BLANKDATE":dateString.toUpperCase().trim()).append("/");
-        path.append((catalogNumber==null)?"BLANKCATNR":catalogNumber.toUpperCase().trim()).append("/");
-        
-        return path.toString();
-        
-    }
-    
+   
    public static List<String> convertStrToList(String str,String separator,String defaultVal,String ignoreVal){
        List<String> retObj=new ArrayList<>();
        str=(str==null)?defaultVal:str.trim();
@@ -338,7 +327,7 @@ public class NUtil {
     
     public static String getStringProperty(String propName,String defaultVal){
         String propVal=defaultVal;
-        propVal=cmsProps.getProperty(propName);
+        propVal=dbProps.getProperty(propName);
         propVal=(propVal==null)?defaultVal:propVal.trim();
         return propVal;
     }
@@ -351,14 +340,14 @@ public class NUtil {
     
     public static int getIntProperty(String propName,int defaultVal){
         String propVal=""+defaultVal;
-        propVal=cmsProps.getProperty(propName);
+        propVal=dbProps.getProperty(propName);
         propVal=(propVal==null)?""+defaultVal:propVal.trim();
         return Integer.parseInt(propVal);
     }
     
     public static double getDoubleProperty(String propName,double defaultVal){
         String propVal=""+defaultVal;
-        propVal=cmsProps.getProperty(propName);
+        propVal=dbProps.getProperty(propName);
         propVal=(propVal==null)?""+defaultVal:propVal.trim();
         return Double.parseDouble(propVal);
     }

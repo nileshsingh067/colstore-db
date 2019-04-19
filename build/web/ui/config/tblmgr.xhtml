@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
@@ -9,66 +9,97 @@
     <body>
 
         <ui:composition template="./../home/header.xhtml">
-
             <ui:define name="content">
                 <h:form id="frm1">
                     <p:accordionPanel id="ap1">
                         <p:tab title="Create New Table">
-                                        <table width="100%" align="left">
-                                              <tr><td colspan="6" width="100%"><hr/></td></tr>
-                                            <tr>
-                                                <td width="16%" align="right"> <h:outputLabel value="Table Name :" for="tblname"/></td>
-                                                <td width="16%" ><p:inputText id="tblname" value="#{tableManagerBean.tableName}" style="width:170px;"/></td>
-                                                <td width="16%" align="right"></td>
-                                                <td width="16%"></td>
-                                                <td width="30%" align="right"> </td>
-                                                <td width="36%" align="right" colspan="2"> </td>
-                                            </tr>
-                                              <tr>
-                                                <td width="16%" align="right"> <h:outputLabel value="Column Details :" for="coldetails"/></td>
-                                                <td width="16%" ><p:inputTextarea rows="6" cols="33" id="coldetails" value="#{tableManagerBean.coldetails}" style="width:170px;"/></td>
-                                                <td width="50%"> <h:outputText class="infomsg" value="Enter Column Details" style="width:100%;"/></td>
-                                                <td width="16%" align="right"> <p:commandButton value="Submit" update="msgOut,:left_menu_form:tmenu" actionListener="#{tableManagerBean.createTable()}" style="width:170px;"/></td>
-                                            </tr>
-                                              <tr><td colspan="6" width="100%"><hr/></td></tr>
-                                            <tr>
-                                                <td width="100%" colspan="6"><h:outputText id="msgOut"  value="#{tableManagerBean.msg}"/></td>
-                                            </tr>
-                                        </table>
+                            <table width="100%" align="left">
+                                <tr><td colspan="6" width="100%"><hr/></td></tr>
+                                <tr>
+
+                                    <td width="16%" align="right"> <p:outputLabel for="console" value="Database:" /></td>
+                                    <td width="16%"> <p:selectOneMenu id="console" value="#{tableManagerBean.selectedDb.db_name}" style="width:125px">
+                                            <f:selectItem itemLabel="Select Database" itemValue="" />
+                                            <f:selectItems value="#{nodeService.dblist}" />
+                                        </p:selectOneMenu></td>
+                                    <td width="16%" align="right"> <h:outputLabel value="Table Name :" for="tblname"/></td>
+                                    <td width="16%" ><p:inputText id="tblname" value="#{tableManagerBean.newTable.tbl_name}" style="width:170px;"/></td>
+                                    <td width="30%" align="right"> </td>
+                                    <td width="36%" align="right" colspan="2"> </td>
+                                </tr>
+                                <tr><td colspan="6" width="100%"><hr/></td></tr>
+                                <tr>
+                                    <td width="100%" colspan="2" align="center">
+                                        <p:dataTable id="col1" widgetVar="col1" var="col" value="#{tableManagerBean.columnList}" editable="true" paginator="true" rows="10" rowKey="#{col.id}">
+                                            <f:facet name="header">
+                                                <p:commandButton value="Add new column" styleClass="ui-priority-primary" update="col1"
+                                                                 action="#{tableManagerBean.onAddNew()}"/>  
+                                            </f:facet>
+                                            <!--p:column style="alignment-adjust: middle;alignment-baseline: central;">
+                                                <f:facet name="header">
+                                                    <h:outputText value="Column Name" />
+                                                </f:facet>
+                                                <h:outputText value="#{col.col_name}" />
+                                            </p:column>
+                                            <p:column  style="alignment-adjust: middle;alignment-baseline: central;">
+                                                <f:facet name="header">
+                                                    <h:outputText value="DataType" />
+                                                </f:facet>
+                                                <h:outputText value="#{col.col_dataType}" />
+                                            </p:column-->
+                                            <p:ajax event="rowEdit" listener="#{tableManagerBean.onRowEdit}"  />
+                                            <p:ajax event="rowEditCancel" listener="#{tableManagerBean.onRowCancel}"  />
+
+                                            <p:column headerText="Column Name">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{col.col_name}" /></f:facet>
+                                                    <f:facet name="input"><p:inputText value="#{col.col_name}" style="width:100%" label="Year"/></f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+
+                                            <p:column headerText="DataType">
+                                                <p:cellEditor>
+                                                    <f:facet name="output"><h:outputText value="#{col.col_dataType}" /></f:facet>
+                                                    <f:facet name="input">
+                                                        <h:selectOneMenu value="#{col.col_dataType}" style="width:100%">
+                                                            <f:selectItems value="#{tableManagerBean.dataTypeList}" var="man" itemLabel="#{man}" itemValue="#{man}" />
+                                                        </h:selectOneMenu>
+                                                    </f:facet>
+                                                </p:cellEditor>
+                                            </p:column>
+                                            <p:column style="width:32px">
+                                                <p:rowEditor />
+                                            </p:column>
+                                        </p:dataTable>
+
+                                    </td>
+                                </tr>
+                                <tr><td colspan="6" width="100%"><hr/></td></tr>
+                                <tr>
+
+                                    <td width="16%" align="right"> </td>
+                                    <td width="16%"> </td>
+                                    <td width="16%" align="right"> </td>
+                                    <td width="16%" ></td>
+                                    <td width="30%" align="right"> </td>
+                                    <td width="36%" align="right" colspan="2"> <p:commandButton value="Submit" update="msgOut,col1,tblname,:left_menu_form:tmenu" process="@form" actionListener="#{tableManagerBean.createNewTable()}" style="width:170px;"/></td>
+                                </tr>
+                                <tr>
+                                    <td width="100%" colspan="6"><h:outputText id="msgOut"  value="#{tableManagerBean.msg}"/></td>
+                                </tr>
+
+                            </table>       
                         </p:tab>
                         <p:tab title="View/Change Table Details">
-                        
+
                         </p:tab>
                     </p:accordionPanel>
                 </h:form>
             </ui:define>
             <ui:define name="left">
-                  <h:form id="left_menu_form">
-                     <p:growl id="messages" showDetail="true" />
-                    <p:tree id="tmenu" value="#{rMenuBuilder.root}" var="doc" selectionMode="single"
-                            selection="#{tableManagerBean.selectedNode}">
-<!--                        <p:ajax event="select" update=":left_menu_form:messages" listener="#{rMenuBuilder.onNodeSelect}" />-->
-                        <p:treeNode expandedIcon="pi pi-folder-open" collapsedIcon="pi pi-folder">
-<!--                            <h:outputText value="#{doc.name}-#{doc.type}"/>-->
-                            <h:outputLink value="#{doc.url}">#{doc.name}-#{doc.type}</h:outputLink>
-<!--                            <p:commandButton value="#{doc.name}" action="#{rMenuBuilder.treeNodeListener()}"  id="treeNode"/> -->
-                        </p:treeNode>
-                        <!--p:treeNode type="DB" icon="pi pi-file">
-                            <h:outputText value="#{doc.name}" />
-                        </p:treeNode>
 
-                        <p:treeNode type="Table" icon="pi pi-image">
-                            <h:outputText value="#{doc.name}" />
-                        </p:treeNode>
-
-                        <p:treeNode type="Column" icon="pi pi-video">
-                            <h:outputText value="#{doc.name}" />
-                        </p:treeNode-->
-
-                    </p:tree>
-                </h:form>
             </ui:define>
-          
+
 
         </ui:composition>
 

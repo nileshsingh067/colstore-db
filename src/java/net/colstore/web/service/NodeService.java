@@ -5,7 +5,9 @@
  */
 package net.colstore.web.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import net.colstore.dao.ColListDAO;
@@ -38,17 +40,20 @@ public class NodeService {
     private ColListDAO colListDAO;
     private DbListDAO dbListDAO;
     private TblListDAO tblListDAO;
+     Map<String, String> dblist;
     
     
     public NodeService(){
         dbConn=new DBConnection();
         colListDAO=new ColListDAO();
         dbListDAO=new DbListDAO();
-        tblListDAO=new TblListDAO();
+        tblListDAO=new TblListDAO(); dblist = new HashMap<String, String>();
+        
         boolean loginStatus=fetchLoginDetails();
     }
     public TreeNode createDocuments() {
         fetchLoginDetails();
+        createDbList();
          System.out.println("NodeService  :: createDocuments");
         TreeNode root = new DefaultTreeNode(new Node("Files", "-", "Folder","#"), null);
         //dynamic db list
@@ -94,6 +99,17 @@ public class NodeService {
         TreeNode CreateNewDb = new CheckboxTreeNode(new Node("Create New", "-", "Folder","/faces/ui/config/usermgr.xhtmls"), root);
         return root;
     }
+     public void createDbList() {
+        dbConn.logUIMsg(RLogger.MSG_TYPE_INFO, RLogger.LOGGING_LEVEL_DEBUG, "NodeService.class :: createDbList() :: loginBean {User Id=" + this.getUserId() + ",UserName=" + this.getUserName() + ",RoleId=" + this.getRoleId() + ",RoleName=" + this.getRoleName() + "}");
+        DbListDAO dbdao = new DbListDAO();
+        List<DbList> db = dbdao.getDbList(this.getUserId());
+        dblist.clear();
+        for (DbList newDB : db) {
+            dblist.put(newDB.getDb_name(), newDB.getDb_name());
+        }
+        dbConn.logUIMsg(RLogger.MSG_TYPE_INFO, RLogger.LOGGING_LEVEL_DEBUG, "NodeService.class :: createDbList() :: " + dblist.size());
+    }
+
         public boolean fetchLoginDetails(){
         boolean flag=false;
         LoginBean loginBeanObj=null;
@@ -145,6 +161,14 @@ public class NodeService {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Map<String, String> getDblist() {
+        return dblist;
+    }
+
+    public void setDblist(Map<String, String> dblist) {
+        this.dblist = dblist;
     }
   
     
